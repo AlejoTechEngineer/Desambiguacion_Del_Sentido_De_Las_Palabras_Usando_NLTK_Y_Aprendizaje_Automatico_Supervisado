@@ -23,6 +23,23 @@ Implementación de un sistema de **Word Sense Disambiguation (WSD)** usando clas
 | `Laboratorio_Desambiguacion_Palabras.ipynb` | Notebook principal con todo el pipeline WSD |
 | `*.pdf` | Informe de resultados y análisis |
 
+## Arquitectura
+
+```mermaid
+flowchart TD
+    A[Laboratorio_Desambiguacion_Palabras.ipynb] --> B[extract_context_features - word - sentence - window=5]
+    B --> C[Palabras vecinas / POS tags / N-gramas]
+    C --> D[training_set / test_set - corpus anotado]
+    D --> E[nltk.NaiveBayesClassifier.train]
+    D --> F[DecisionTree Classifier]
+    D --> G[MaxEnt Classifier]
+    E --> H{nltk.classify.accuracy}
+    F --> H
+    G --> H
+    H --> I[Evaluacion precision WSD]
+    I --> J[(WordNet / SemCor - corpus semantico NLTK)]
+```
+
 ## Pipeline de WSD implementado
 
 ```python
@@ -42,23 +59,6 @@ accuracy = nltk.classify.accuracy(classifier, test_set)
 **Autor:** Alejandro De Mendoza — Ingeniero Informático · Especialista en IA
 
 ---
-
-## Arquitectura
-
-```mermaid
-flowchart TD
-    A[Laboratorio_Desambiguacion_Palabras.ipynb] --> B[extract_context_features - word - sentence - window=5]
-    B --> C[Palabras vecinas / POS tags / N-gramas]
-    C --> D[training_set / test_set - corpus anotado]
-    D --> E[nltk.NaiveBayesClassifier.train]
-    D --> F[DecisionTree Classifier]
-    D --> G[MaxEnt Classifier]
-    E --> H{nltk.classify.accuracy}
-    F --> H
-    G --> H
-    H --> I[Evaluacion precision WSD]
-    I --> J[(WordNet / SemCor - corpus semantico NLTK)]
-```
 
 ## Autor
 
